@@ -1,0 +1,4 @@
+interface:
+  display_name: "CCF Paper Reader"
+  short_description: "Read one paper into a Chinese-first structured research note."
+  default_prompt: "Use $ccf-paper-reader to read this paper and produce a Chinese-first structured note."

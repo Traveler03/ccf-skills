@@ -1,0 +1,10 @@
+.DS_Store
+*.log
+*.tmp
+*.pyc
+__pycache__/
+
+private/
+secrets/
+credentials/
+local-notes/
