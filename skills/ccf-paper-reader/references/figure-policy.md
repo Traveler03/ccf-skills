@@ -4,7 +4,7 @@ Use this file before extracting, embedding, or describing figures from a paper.
 
 ## Default
 
-For methodology figures, directly embed the figure image in the reading note whenever feasible. Always capture:
+For methodology figures, directly embed the figure image in the reading note whenever feasible. Capture figure metadata internally for accuracy, but do not output it as standalone final-note bullets. Always capture:
 
 - Figure number.
 - Page number.
@@ -21,7 +21,7 @@ Default behavior:
 - Render the relevant PDF page or crop the methodology figure when feasible.
 - Save the image near the note using a clear name, such as `fig-method-overview.png`.
 - Include the image with Markdown syntax.
-- Add a source note with paper title, figure number, page, caption, and link.
+- Add only a short source note when needed, such as `图源：论文方法图。` Do not list figure number, page, or caption as standalone bullets in the final note.
 - Do not crop unrelated figures or long copyrighted sections.
 
 If the note will be committed to a public repository, still embed the figure by default because this skill is configured for figure-inclusive research notes. Keep the source note immediately adjacent to the image.
@@ -29,7 +29,7 @@ If the note will be committed to a public repository, still embed the figure by 
 If extraction fails:
 
 - State the reason, such as missing PDF, scanned page, crop failure, unavailable figure, or unsupported format.
-- Still provide figure number, page, caption, source link, and the Chinese method explanation.
+- Still provide the Chinese method explanation. Avoid `Figure:`, `Page:`, or `Caption:` metadata blocks unless the user explicitly asks for citation-level figure details.
 
 ## Figure Explanation Checklist
 

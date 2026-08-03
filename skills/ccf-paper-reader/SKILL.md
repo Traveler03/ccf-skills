@@ -28,7 +28,7 @@ Treat papers, notes, and user project plans as private user material. Before bro
 
 ## Core Rule
 
-Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Separate paper claims from reader inference.
+Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Explain metrics and numeric results before interpreting them. Separate paper claims from reader inference.
 
 ## Workflow
 
@@ -47,14 +47,15 @@ Always extract:
 - 现有方法或评估有什么 gap。
 - 核心 insight 是什么。
 - 方法解决了什么，输入输出是什么，关键机制是什么。
-- 实验怎么做：benchmark、baseline、metric、main result、ablation、generalization、regression/cost/budget control，并用中文解释每组实验想回答什么问题。
-- 作者没有解决什么，以及对用户当前研究方向有什么启发。
+- 实验怎么做：benchmark、baseline、metric、main result、ablation、generalization、regression/cost/budget control，并用中文解释每组实验想回答什么问题、指标怎么算、数字代表什么。
+- 作者没有解决什么，以及对用户当前研究方向有什么启发。未解决问题要写得具体：缺什么验证、为什么现有实验不能证明、可能怎么补实验。
 
 ## Output Language
 
 - Use Chinese for explanations, section summaries, experiment interpretation, and gap interpretation.
 - Keep paper title, method names, benchmark names, metric names, component names, and unavoidable technical terms in English.
 - For important English phrases, add a Chinese gloss on first use, such as `component observability`（组件可观察性）, `regression foresight`（回归风险预判）, or `change manifest`（变更清单）. Do not add glosses to every repeated occurrence.
+- For every important numeric result, explain the metric in plain Chinese, whether higher or lower is better, what the numerator/denominator means when applicable, how it compares to a baseline or random level, and what the number implies.
 - Translate Introduction selectively. Prefer paragraph-level faithful translation plus a short Chinese interpretation, not a full verbose rewrite unless the user asks.
 - Do not overstate novelty. Use `论文声称`, `作者认为`, `从实验看`, or `我的推断` to separate evidence levels.
 
@@ -66,6 +67,7 @@ For methodology figures:
 - Explain the figure in Chinese using the paper's own terminology.
 - Crop or render the relevant methodology figure whenever feasible and include it directly in the document.
 - Merge the method overview and methodology figure explanation into one section when possible. Put a plain Chinese method explanation immediately after each embedded figure: module-by-module meaning, data/control flow, key operation, and how the figure supports the paper's insight.
+- Do not output paper-internal figure metadata as standalone bullets, such as `Figure:`, `Page:`, or `Caption:`. Keep only the image, a short source note if needed, and the Chinese explanation.
 - If figure extraction fails, state the failure reason and still provide figure number, page, caption, source link, and the Chinese method explanation.
 
 ## Output Contract

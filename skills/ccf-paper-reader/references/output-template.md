@@ -1,6 +1,6 @@
 # Paper Reading Note Template
 
-Use Chinese as the main language. Keep necessary English names and terms. For important English phrases, add a short Chinese gloss on first use, such as `change manifest`（变更清单）. Avoid English-heavy section titles and tables unless the English term is the paper's method name, metric, dataset, or benchmark.
+Use Chinese as the main language. Keep necessary English names and terms. For important English phrases, add a short Chinese gloss on first use, such as `change manifest`（变更清单）. Avoid English-heavy section titles and tables unless the English term is the paper's method name, metric, dataset, or benchmark. Do not output paper-internal figure metadata such as `Figure:`, `Page:`, or `Caption:` in the final note.
 
 ```markdown
 # <Paper Title>
@@ -42,11 +42,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 
 - 输入：
 - 输出：
-- 方法图：
-  - Figure:
-  - Page:
-  - Caption:
-  - Image:
+- 方法图：直接贴图，不列 Figure/Page/Caption 元信息；如需要，只写一句简短图源。
 - 先用一句话讲方法：
 - 图中模块通俗解释：
 - 训练/搜索/推理流程：
@@ -74,6 +70,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - 任务/数据集：
 - Baseline（对比方法）：
 - Metric（指标）：
+- 指标怎么理解：这个指标怎么算，越高/越低代表什么：
 - 预算/成本/运行设置：
 
 ### 7.2 主实验：它到底有没有变强
@@ -81,6 +78,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - 实验想回答的问题：
 - 怎么比：
 - 关键结果：
+- 指标和数字解释：
 - 中文解释：
 - 这个实验能证明什么：
 - 这个实验还不能证明什么：
@@ -89,6 +87,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 
 - 消融了哪些组件：
 - 关键结果：
+- 指标和数字解释：
 - 中文解释：
 - 说明了什么：
 - 仍然不清楚什么：
@@ -98,6 +97,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - 泛化/迁移实验：
 - 成本或 token 分析：
 - 回归或负面结果：
+- 指标和数字解释：
 - 中文解释：
 - 对我们研究 gap 的启发：
 
@@ -117,9 +117,19 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 
 ## 10. What Remains Unsolved：还没解决什么
 
-- 未验证的问题：
-- 可能的 confounder：
-- 可继续做的 gap：
+对每个未解决问题，尽量写四点：缺什么验证；为什么论文已有实验还不能证明；这件事为什么重要；可以怎么补实验或形成 idea。
+
+- 未解决问题 1：
+  - 缺什么验证：
+  - 为什么现有实验不够：
+  - 为什么重要：
+  - 可能怎么做：
+- 未解决问题 2：
+  - 缺什么验证：
+  - 为什么现有实验不够：
+  - 为什么重要：
+  - 可能怎么做：
+- 可能的 confounder（混淆因素）：
 - 和当前项目的关系：
 
 ## 11. 对我们方向的启发
