@@ -18,11 +18,12 @@ Use these labels when needed:
 2. 它说 existing methods 有什么不足？
 3. 它的核心 insight 是什么？
 4. 它提出的方法输入是什么、输出是什么、关键机制是什么？
-5. 它和最接近工作相比，真正变化在哪里？用通俗中文解释差别。
-6. 它的主实验验证了什么 claim？主实验和消融实验要分开解释，并解释关键指标和数字。
-7. 它有没有 ablation（消融）、generalization（泛化）、robustness（鲁棒性）、cost（成本）、regression（回归）或 budget control（预算控制）？
-8. 它没有验证什么？
-9. 对用户当前项目的 gap 或 idea 有什么启发？
+5. 如果方法有结构化中间产物，最小 JSON-style data flow 长什么样？字段中文意思是什么？
+6. 它和最接近工作相比，真正变化在哪里？用通俗中文解释差别。
+7. 它的主实验验证了什么 claim？主实验和消融实验要分开解释，并解释关键指标和数字。
+8. 它有没有 ablation（消融）、generalization（泛化）、robustness（鲁棒性）、cost（成本）、regression（回归）或 budget control（预算控制）？
+9. 它没有验证什么？
+10. 对用户当前项目的 gap 或 idea 有什么启发？
 
 ## Section Priorities
 
@@ -65,4 +66,4 @@ Use these questions to produce useful gap notes:
 - 有没有检查 regression？
 - 有没有依赖 human/oracle signal，真实自动化时是否仍成立？
 - 关键数值有没有解释清楚：指标含义、比较对象、直观意义、结论边界？
-- 还没解决的问题有没有写清楚：缺什么验证、为什么重要、能怎么继续做？
+- 还没解决的问题有没有聚焦：是否围绕用户方向收束成 2-4 个核心 gap，并用论文证据数字或实验现象支撑？
