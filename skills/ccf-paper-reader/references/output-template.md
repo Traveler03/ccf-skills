@@ -1,6 +1,6 @@
 # Paper Reading Note Template
 
-Use Chinese as the main language. Keep necessary English names and terms.
+Use Chinese as the main language. Keep necessary English names and terms. For important English phrases, add a short Chinese gloss on first use, such as `change manifest`（变更清单）. Avoid English-heavy section titles and tables unless the English term is the paper's method name, metric, dataset, or benchmark.
 
 ```markdown
 # <Paper Title>
@@ -38,73 +38,98 @@ Use Chinese as the main language. Keep necessary English names and terms.
 - 为什么这个 insight 能解决 gap：
 - 这个 insight 是否新颖：论文声称 / 我的推断 / 需要进一步查证
 
-## 5. Method：方法做了什么
+## 5. Method & Figure：方法和图怎么讲
 
 - 输入：
 - 输出：
-- 关键模块：
+- 方法图：
+  - Figure:
+  - Page:
+  - Caption:
+  - Image:
+- 先用一句话讲方法：
+- 图中模块通俗解释：
 - 训练/搜索/推理流程：
+- 这张图和论文核心 insight 的关系：
+- 哪些只是工程支撑，哪些是真正的方法贡献：
 - 和 closest baseline 的主要差别：
 
-## 6. Methodology Figure：方法图解释
+## 6. Introduction 翻译与理解
 
-- Figure:
-- Page:
-- Caption:
-- Image:
-- 图中模块解释：
-- 这张图传达的核心机制：
-- 图和论文 insight 的关系：
-- 图和实验 claim 的关系：
-
-## 7. Introduction 翻译与理解
-
-### 7.1 忠实翻译
+### 6.1 忠实翻译
 
 按段落翻译 Introduction 中最关键的动机、gap、contribution 段落。不要机械翻译全文，除非用户要求。
 
-### 7.2 中文理解
+### 6.2 中文理解
 
 - 作者如何讲 problem：
 - 作者如何制造 gap：
 - 作者如何引出 method：
 - 这套 narrative 对我们写作有什么可借鉴：
 
-## 8. Experiments：实验怎么做
+## 7. Experiments：实验怎么做
 
-| Claim | Benchmark / Dataset | Baseline | Metric | Main Result | What It Proves | What It Does Not Prove |
-| --- | --- | --- | --- | --- | --- | --- |
-| 待填写 | 待填写 | 待填写 | 待填写 | 待填写 | 待填写 | 待填写 |
+### 7.1 实验设置
 
-## 9. Ablation / Analysis
+- 任务/数据集：
+- Baseline（对比方法）：
+- Metric（指标）：
+- 预算/成本/运行设置：
+
+### 7.2 主实验：它到底有没有变强
+
+- 实验想回答的问题：
+- 怎么比：
+- 关键结果：
+- 中文解释：
+- 这个实验能证明什么：
+- 这个实验还不能证明什么：
+
+### 7.3 消融实验：到底是哪部分有用
+
+- 消融了哪些组件：
+- 关键结果：
+- 中文解释：
+- 说明了什么：
+- 仍然不清楚什么：
+
+### 7.4 泛化、迁移、成本和回归
+
+- 泛化/迁移实验：
+- 成本或 token 分析：
+- 回归或负面结果：
+- 中文解释：
+- 对我们研究 gap 的启发：
+
+## 8. Analysis：作者额外分析了什么
 
 - Ablation 检查了什么组件：
 - 结果说明什么：
 - 有没有 robustness/generalization/cost/regression 分析：
 - 缺失的关键实验：
 
-## 10. Limitations：作者承认的限制
+## 9. Limitations：作者承认的限制
 
 - 作者明确写出的 limitation：
 - 实验范围限制：
 - 方法假设：
 - 可能失败场景：
 
-## 11. What Remains Unsolved：还没解决什么
+## 10. What Remains Unsolved：还没解决什么
 
 - 未验证的问题：
 - 可能的 confounder：
 - 可继续做的 gap：
 - 和当前项目的关系：
 
-## 12. 对我们方向的启发
+## 11. 对我们方向的启发
 
 - 可以借鉴的 framing：
 - 可以借鉴的方法模块：
 - 可以攻击或补充的 evaluation gap：
 - 可能形成的 idea：
 
-## 13. Action Items
+## 12. Action Items
 
 - Update gap map: yes / no
 - Update idea bank: yes / no

@@ -33,7 +33,7 @@ If extraction fails:
 
 ## Figure Explanation Checklist
 
-After each embedded methodology figure, explain:
+After each embedded methodology figure, explain in plain Chinese and avoid repeating a separate method section:
 
 - What enters the pipeline.
 - What each module does.
