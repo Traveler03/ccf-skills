@@ -18,7 +18,7 @@ Use these labels when needed:
 2. 它说 existing methods 有什么不足？
 3. 它的核心 insight 是什么？
 4. 它提出的方法输入是什么、输出是什么、关键机制是什么？
-5. 如果方法有结构化中间产物，最小 JSON-style data flow 长什么样？字段中文意思是什么？
+5. 如果方法有结构化中间产物，最小 JSON-style data flow 长什么样？字段名是否在 JSON 内用括号自带中文解释？
 6. 它和最接近工作相比，真正变化在哪里？用通俗中文解释差别。
 7. 它的主实验验证了什么 claim？主实验和消融实验要分开解释，并解释关键指标和数字。
 8. 它有没有 ablation（消融）、generalization（泛化）、robustness（鲁棒性）、cost（成本）、regression（回归）或 budget control（预算控制）？
