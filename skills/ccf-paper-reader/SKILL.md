@@ -35,7 +35,7 @@ Read the paper to support research understanding and gap discovery, not to produ
 1. Identify input type: arXiv URL, PDF path, paper title, repository link, or pasted text.
 2. Read metadata, abstract, Introduction, method overview, figures, experiments, limitations, and conclusion. If time is limited, prioritize Introduction, method figure, experiment setup, main results, ablations, and limitations.
 3. Load `references/reading-checklist.md` before producing the reading note.
-4. Load `references/figure-policy.md` before extracting, embedding, or describing methodology figures.
+4. Load `references/figure-policy.md` before extracting, embedding, or describing methodology figures. Default to embedding the methodology figure directly in the note whenever feasible.
 5. Load `references/output-template.md` and fill only the sections supported by the paper. Mark missing evidence as `未找到` or `需要进一步查证`.
 6. If the output belongs in a project repo, place the note under that repo's paper-note convention when known; otherwise return the note inline.
 
@@ -63,8 +63,9 @@ For methodology figures:
 
 - Identify figure number, page, caption, and what each module means.
 - Explain the figure in Chinese using the paper's own terminology.
-- If the output is a private/local note and the user wants images, crop or render the relevant figure when feasible and include it in the document.
-- If the output will be committed to a public repo, default to figure metadata plus explanation instead of embedding copyrighted images, unless the figure is clearly licensed for reuse or the user explicitly authorizes it.
+- Crop or render the relevant methodology figure whenever feasible and include it directly in the document.
+- Put a Chinese method explanation immediately after each embedded figure: module-by-module meaning, data/control flow, key operation, and how the figure supports the paper's insight.
+- If figure extraction fails, state the failure reason and still provide figure number, page, caption, source link, and the Chinese method explanation.
 
 ## Output Contract
 
@@ -88,4 +89,3 @@ For standard reading, include the full template, methodology figure explanation,
 - `references/reading-checklist.md`: Read before extracting paper content or deciding what sections matter.
 - `references/output-template.md`: Read before writing the final reading note.
 - `references/figure-policy.md`: Read before extracting, embedding, or describing paper figures.
-

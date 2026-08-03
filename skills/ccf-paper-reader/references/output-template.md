@@ -51,9 +51,11 @@ Use Chinese as the main language. Keep necessary English names and terms.
 - Figure:
 - Page:
 - Caption:
+- Image:
 - 图中模块解释：
 - 这张图传达的核心机制：
-- 是否已嵌入图片：yes / no / not allowed for public repo
+- 图和论文 insight 的关系：
+- 图和实验 claim 的关系：
 
 ## 7. Introduction 翻译与理解
 
