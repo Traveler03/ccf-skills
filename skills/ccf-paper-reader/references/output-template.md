@@ -47,6 +47,7 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - 图中模块通俗解释：
 - 训练/搜索/推理流程：
 - 最小数据流示例：如果论文有结构化中间产物，给一个紧凑 JSON-style example。JSON 字段名直接自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。说明该示例是理解用简化版本还是论文原始格式。
+- 字段流向/简化流程图：紧跟 JSON 后解释每组字段怎么流动。按“字段组 -> 由谁产生 -> 输入给谁 -> 输出什么 -> 下游怎么用”讲清楚。可以用 4-7 行短表或箭头链路；重点回答用户读 JSON 时最关心的“哪个部分输入给谁，输出了什么”。
 - 这张图和论文核心 insight 的关系：
 - 哪些只是工程支撑，哪些是真正的方法贡献：
 - 和 closest baseline 的主要差别：
