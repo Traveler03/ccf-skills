@@ -1,6 +1,6 @@
 # Paper Reading Note Template
 
-Use Chinese as the main language. Keep necessary English names and terms. For important English phrases, add a short Chinese gloss on first use, such as `change manifest`（变更清单）. Avoid English-heavy section titles and tables unless the English term is the paper's method name, metric, dataset, or benchmark. Do not output paper-internal figure metadata such as `Figure:`, `Page:`, or `Caption:` in the final note.
+Use Chinese as the main language. Keep necessary English names and terms. For every non-trivial English technical phrase, add a short Chinese gloss on first use, such as `change manifest`（变更清单）. Avoid English-heavy section titles and tables unless the English term is the paper's method name, metric, dataset, or benchmark; if English appears in headings, table headers, table cells, JSON keys/values, figure-module labels, or metric descriptions, add a Chinese gloss there too unless already obvious from the same line. Do not output paper-internal figure metadata such as `Figure:`, `Page:`, or `Caption:` in the final note.
 
 ```markdown
 # <Paper Title>
@@ -156,4 +156,5 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - Need literature search: yes / no
 - Need experiment design: yes / no
 - Follow-up papers:
+- Gloss pass completed: yes / no。若为 yes，表示已检查标题、表格、JSON、图解释、实验指标、gap 部分和 action items 中的英文技术短语，并补齐中文括注。
 ```

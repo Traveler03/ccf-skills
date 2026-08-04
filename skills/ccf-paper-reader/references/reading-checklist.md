@@ -18,12 +18,13 @@ Use these labels when needed:
 2. 它说 existing methods 有什么不足？
 3. 它的核心 insight 是什么？
 4. 它提出的方法输入是什么、输出是什么、关键机制是什么？
-5. 如果方法有结构化中间产物，最小 JSON-style data flow 长什么样？字段名是否在 JSON 内用括号自带中文解释？JSON 后是否有一条连贯主链说明模块输入输出？是否标出上下文/证据/约束等旁路输入如何接入主链？有没有避免把并行输入误写成线性字段流？
-6. 它和最接近工作相比，真正变化在哪里？用通俗中文解释差别。
-7. 它的主实验验证了什么 claim？主实验和消融实验要分开解释，并解释关键指标和数字。
-8. 它有没有 ablation（消融）、generalization（泛化）、robustness（鲁棒性）、cost（成本）、regression（回归）或 budget control（预算控制）？
-9. 它没有验证什么？
-10. 对用户当前项目的 gap 或 idea 有什么启发？
+5. 英文技术短语是否全部带括号翻译？检查标题、段落、表格、图解释、JSON、实验指标、artifact 名称、实验设置名和 gap 部分。非平凡英文短语首次出现必须写成 `English phrase（中文解释）`；如果该短语在新章节再次承担关键解释作用，可以再次括注。避免 `Main result`、`Ablation`、`Metric`、`archive sampling`、`fitness evaluation` 这类裸英文标签。
+6. 如果方法有结构化中间产物，最小 JSON-style data flow 长什么样？字段名是否在 JSON 内用括号自带中文解释？JSON 后是否有一条连贯主链说明模块输入输出？是否标出上下文/证据/约束等旁路输入如何接入主链？有没有避免把并行输入误写成线性字段流？
+7. 它和最接近工作相比，真正变化在哪里？用通俗中文解释差别。
+8. 它的主实验验证了什么 claim？主实验和消融实验要分开解释，并解释关键指标和数字。
+9. 它有没有 ablation（消融）、generalization（泛化）、robustness（鲁棒性）、cost（成本）、regression（回归）或 budget control（预算控制）？
+10. 它没有验证什么？
+11. 对用户当前项目的 gap 或 idea 有什么启发？
 
 ## Section Priorities
 
@@ -68,3 +69,4 @@ Use these questions to produce useful gap notes:
 - 关键数值有没有解释清楚：指标含义、比较对象、直观意义、结论边界？
 - 还没解决的问题有没有聚焦：是否围绕用户方向收束成 2-4 个核心 gap，并用论文证据数字或实验现象支撑？
 - JSON-style 示例有没有配套“字段流向/简化流程图”：是否先给了连贯主链，而不是只给孤立表格？模块输入输出、并行输入、真实依赖边、下游使用方式是否讲清楚？有没有把 `task`、`round` 这类上下文字段和 `failure_evidence` 这类证据字段区分开？
+- 最终 gloss pass 是否完成：是否还存在未解释的英文多词短语、英文表头、英文实验设置名、英文 artifact 名、英文图中模块名、英文指标名或英文 JSON 值？如果存在，先补 `English（中文）`，再交付。
