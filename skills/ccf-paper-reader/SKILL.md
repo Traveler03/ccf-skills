@@ -28,7 +28,7 @@ Treat papers, notes, and user project plans as private user material. Before bro
 
 ## Core Rule
 
-Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Explain metrics and numeric results before interpreting them. When a method has structured artifacts or pipeline data, include a minimal bilingual JSON-style example with Chinese glosses in parentheses inside the JSON itself, then explain the data-dependency flow as compact module I/O: which field groups are context inputs, which are evidence inputs, which stage consumes them, what artifact that stage outputs, and how downstream stages use the artifact. Do not imply a linear field-to-field flow when the fields are actually parallel inputs. Separate paper claims from reader inference.
+Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Explain metrics and numeric results before interpreting them. When a method has structured artifacts or pipeline data, include a minimal bilingual JSON-style example with Chinese glosses in parentheses inside the JSON itself, then explain the data-dependency flow as a coherent simplified DAG: a connected main chain, side inputs that join the chain, and any feedback loop. Do not imply a linear field-to-field flow when fields are actually parallel inputs. Separate paper claims from reader inference.
 
 ## Workflow
 
@@ -47,7 +47,7 @@ Always extract:
 - 现有方法或评估有什么 gap。
 - 核心 insight 是什么。
 - 方法解决了什么，输入输出是什么，关键机制是什么。
-- 方法或 pipeline 中间数据长什么样。若论文包含 manifest、trace report、memory entry、tool call、workflow state、evaluation record 等结构化产物，给出一个最小 JSON-style example。JSON 内部字段名应自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。示例要标明是“理解用最小示例”还是“论文原始格式”。示例后必须补一段“字段流向/简化流程图”说明，但要按模块输入输出讲清楚：哪些字段只是上下文输入，哪些字段是证据输入，哪些字段由某个模块生成，哪些字段被下游模块消费。不要把没有依赖关系的字段硬写成线性流向。
+- 方法或 pipeline 中间数据长什么样。若论文包含 manifest、trace report、memory entry、tool call、workflow state、evaluation record 等结构化产物，给出一个最小 JSON-style example。JSON 内部字段名应自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。示例要标明是“理解用最小示例”还是“论文原始格式”。示例后必须补一段连贯的“字段流向/简化流程图”：先写一条主链，把模块输入输出连起来；再标注上下文、证据、约束、预测等旁路字段如何接入主链；最后说明验证结果如何回流到下一轮或历史。不要用孤立表格替代主链。
 - 实验怎么做：benchmark、baseline、metric、main result、ablation、generalization、regression/cost/budget control，并用中文解释每组实验想回答什么问题、指标怎么算、数字代表什么。
 - 作者没有解决什么，以及对用户当前研究方向有什么启发。未解决问题要写得具体：缺什么验证、为什么现有实验不能证明、可能怎么补实验。
 
@@ -57,7 +57,7 @@ Always extract:
 - Keep paper title, method names, benchmark names, metric names, component names, and unavoidable technical terms in English.
 - For important English phrases, add a Chinese gloss on first use, such as `component observability`（组件可观察性）, `regression foresight`（回归风险预判）, or `change manifest`（变更清单）. Do not add glosses to every repeated occurrence.
 - For every important numeric result, explain the metric in plain Chinese, whether higher or lower is better, what the numerator/denominator means when applicable, how it compares to a baseline or random level, and what the number implies.
-- For JSON-style examples, keep the JSON valid and compact. Put Chinese glosses directly in keys or short categorical string values using parentheses, such as `predicted_fixes（预测会修好的任务）`. Do not use JSON comments. Avoid a separate field-translation list unless a field is still ambiguous after the inline gloss. Immediately after the JSON block, include a compact Chinese module-I/O explanation or table. It should answer: which stage produces or receives each field group, what parallel inputs are combined, what next artifact is produced, and why it matters. Use arrow notation only for real data dependencies, such as `failure_evidence + task_context -> diagnosis -> edit -> validation verdict`; do not write unrelated top-level fields as if each one flows into the next.
+- For JSON-style examples, keep the JSON valid and compact. Put Chinese glosses directly in keys or short categorical string values using parentheses, such as `predicted_fixes（预测会修好的任务）`. Do not use JSON comments. Avoid a separate field-translation list unless a field is still ambiguous after the inline gloss. Immediately after the JSON block, include a compact Chinese simplified-flow explanation. It must start with a connected main chain using real dependencies, for example `raw_trace + task_context -> evidence_extraction -> failure_evidence; task_context + failure_evidence + harness_state -> diagnosis -> edit; edit -> next_round_execution -> observed_result; predicted_impact + observed_result -> validation_verdict -> keep/rollback/history`. Then add 2-5 bullets explaining side inputs. A table may follow, but must not replace the connected main chain.
 - Translate Introduction selectively. Prefer paragraph-level faithful translation plus a short Chinese interpretation, not a full verbose rewrite unless the user asks.
 - Do not overstate novelty. Use `论文声称`, `作者认为`, `从实验看`, or `我的推断` to separate evidence levels.
 
@@ -88,7 +88,7 @@ Introduction 核心翻译
 对我们方向的启发
 ```
 
-For standard reading, include the full template, a merged method-and-figure explanation, a minimal bilingual JSON-style pipeline/artifact example when applicable, an immediately following field-flow explanation for that JSON, Chinese-first experiment sections, focused evidence-driven gap analysis, and action items. Use tables only when they improve comparison, and prefer Chinese table headers.
+For standard reading, include the full template, a merged method-and-figure explanation, a minimal bilingual JSON-style pipeline/artifact example when applicable, an immediately following connected simplified-flow explanation for that JSON, Chinese-first experiment sections, focused evidence-driven gap analysis, and action items. Use tables only when they improve comparison, and prefer Chinese table headers.
 
 ## References
 

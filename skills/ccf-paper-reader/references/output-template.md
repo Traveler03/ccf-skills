@@ -47,7 +47,13 @@ Use Chinese as the main language. Keep necessary English names and terms. For im
 - 图中模块通俗解释：
 - 训练/搜索/推理流程：
 - 最小数据流示例：如果论文有结构化中间产物，给一个紧凑 JSON-style example。JSON 字段名直接自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。说明该示例是理解用简化版本还是论文原始格式。
-- 字段流向/简化流程图：紧跟 JSON 后解释模块输入输出，而不是强行把顶层字段串成线性链。按“字段组 -> 字段角色（上下文/证据/中间产物/预测/裁决） -> 由谁产生或携带 -> 输入给谁 -> 输出什么 -> 下游怎么用”讲清楚。可以用 4-7 行短表或小型 DAG。只有真实依赖才用箭头；如果 `task/round` 和 `failure_evidence` 都输入给 `diagnosis`，就写成并行输入：`task_context + failure_evidence -> diagnosis`。
+- 字段流向/简化流程图：紧跟 JSON 后先给一条连贯主链，再补充旁路输入。不要强行把顶层字段串成线性链，也不要只给孤立表格。格式优先用 4-6 行箭头链路，例如：
+  - `raw_trace + task_context -> evidence_extraction/debugger -> failure_evidence`
+  - `task_context + failure_evidence + harness_state -> diagnosis -> root_cause / target_component`
+  - `diagnosis + editable_components -> evolve/repair_agent -> edit + predicted_impact`
+  - `edit -> next_round_execution -> observed_result`
+  - `predicted_impact + observed_result -> validation_verdict -> keep/rollback/history`
+  然后用 2-5 条短句解释：哪些字段是上下文输入，哪些是证据输入，哪些是约束或预测，哪些是裁决回流。若论文流程不同，按论文实际模块改写，不要套用不存在的模块。
 - 这张图和论文核心 insight 的关系：
 - 哪些只是工程支撑，哪些是真正的方法贡献：
 - 和 closest baseline 的主要差别：
