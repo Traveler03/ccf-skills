@@ -28,7 +28,7 @@ Treat papers, notes, and user project plans as private user material. Before bro
 
 ## Core Rule
 
-Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Explain metrics and numeric results before interpreting them. When a method has structured artifacts or pipeline data, include a minimal bilingual JSON-style example with Chinese glosses in parentheses inside the JSON itself, then explain the field flow as a compact simplified pipeline: which field group is produced by which stage, who consumes it, what output it creates, and how the next stage uses it. Separate paper claims from reader inference.
+Read the paper to support research understanding and gap discovery, not to produce a generic abstract. Write mainly in Chinese. Keep necessary English terms, method names, dataset names, metric names, and paper-specific terminology in English, but add a short Chinese gloss after important English phrases when first used. Explain metrics and numeric results before interpreting them. When a method has structured artifacts or pipeline data, include a minimal bilingual JSON-style example with Chinese glosses in parentheses inside the JSON itself, then explain the data-dependency flow as compact module I/O: which field groups are context inputs, which are evidence inputs, which stage consumes them, what artifact that stage outputs, and how downstream stages use the artifact. Do not imply a linear field-to-field flow when the fields are actually parallel inputs. Separate paper claims from reader inference.
 
 ## Workflow
 
@@ -47,7 +47,7 @@ Always extract:
 - 现有方法或评估有什么 gap。
 - 核心 insight 是什么。
 - 方法解决了什么，输入输出是什么，关键机制是什么。
-- 方法或 pipeline 中间数据长什么样。若论文包含 manifest、trace report、memory entry、tool call、workflow state、evaluation record 等结构化产物，给出一个最小 JSON-style example。JSON 内部字段名应自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。示例要标明是“理解用最小示例”还是“论文原始格式”。示例后必须补一段“字段流向/简化流程图”说明，按字段组解释：谁产生该字段、输入给哪个模块、输出什么新对象、下游如何使用。
+- 方法或 pipeline 中间数据长什么样。若论文包含 manifest、trace report、memory entry、tool call、workflow state、evaluation record 等结构化产物，给出一个最小 JSON-style example。JSON 内部字段名应自带中文括注，例如 `failure_evidence（失败证据）`；必要的短字符串值也可加括注，例如 `fail（失败）`。示例要标明是“理解用最小示例”还是“论文原始格式”。示例后必须补一段“字段流向/简化流程图”说明，但要按模块输入输出讲清楚：哪些字段只是上下文输入，哪些字段是证据输入，哪些字段由某个模块生成，哪些字段被下游模块消费。不要把没有依赖关系的字段硬写成线性流向。
 - 实验怎么做：benchmark、baseline、metric、main result、ablation、generalization、regression/cost/budget control，并用中文解释每组实验想回答什么问题、指标怎么算、数字代表什么。
 - 作者没有解决什么，以及对用户当前研究方向有什么启发。未解决问题要写得具体：缺什么验证、为什么现有实验不能证明、可能怎么补实验。
 
@@ -57,7 +57,7 @@ Always extract:
 - Keep paper title, method names, benchmark names, metric names, component names, and unavoidable technical terms in English.
 - For important English phrases, add a Chinese gloss on first use, such as `component observability`（组件可观察性）, `regression foresight`（回归风险预判）, or `change manifest`（变更清单）. Do not add glosses to every repeated occurrence.
 - For every important numeric result, explain the metric in plain Chinese, whether higher or lower is better, what the numerator/denominator means when applicable, how it compares to a baseline or random level, and what the number implies.
-- For JSON-style examples, keep the JSON valid and compact. Put Chinese glosses directly in keys or short categorical string values using parentheses, such as `predicted_fixes（预测会修好的任务）`. Do not use JSON comments. Avoid a separate field-translation list unless a field is still ambiguous after the inline gloss. Immediately after the JSON block, include a compact Chinese field-flow explanation or table. It should answer: this field group is the output of which stage, is consumed by which stage, produces what next artifact, and why it matters. Prefer arrow notation such as `failure_evidence -> diagnosis -> edit -> predicted_impact -> verdict` when it improves readability.
+- For JSON-style examples, keep the JSON valid and compact. Put Chinese glosses directly in keys or short categorical string values using parentheses, such as `predicted_fixes（预测会修好的任务）`. Do not use JSON comments. Avoid a separate field-translation list unless a field is still ambiguous after the inline gloss. Immediately after the JSON block, include a compact Chinese module-I/O explanation or table. It should answer: which stage produces or receives each field group, what parallel inputs are combined, what next artifact is produced, and why it matters. Use arrow notation only for real data dependencies, such as `failure_evidence + task_context -> diagnosis -> edit -> validation verdict`; do not write unrelated top-level fields as if each one flows into the next.
 - Translate Introduction selectively. Prefer paragraph-level faithful translation plus a short Chinese interpretation, not a full verbose rewrite unless the user asks.
 - Do not overstate novelty. Use `论文声称`, `作者认为`, `从实验看`, or `我的推断` to separate evidence levels.
 
