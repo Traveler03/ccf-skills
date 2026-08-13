@@ -6,6 +6,7 @@
 - Added `ccf-paper-translator` for faithful full-paper translation with source-order coverage, unchanged equations/citations/numbers, complete appendix and reference handling, and all original paper figures reused in place.
 - Added explicit routing boundaries between paper reading, complete translation, exemplar extraction, manuscript rewriting, and scientific review.
 - Expanded the customized runtime family from 17 to 19 skills and updated manifests, routing, artifact contracts, installation sets, validation, documentation, and generated diagram sources.
+- Required `ccf-paper-translator` to emit render-safe Markdown mathematics with balanced `$...$`/`$$...$$` delimiters, preserved numbering and multiline alignment, table-safe formulas, and a visual render check against the source PDF.
 
 ## v0.9.0 - 2026-08-13
 

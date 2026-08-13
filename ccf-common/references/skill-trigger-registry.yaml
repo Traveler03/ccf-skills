@@ -49,7 +49,7 @@ skills:
     exclude: "Does not perform complete source-order translation, broad literature search, strict review/scoring, or writing exemplar extraction."
     handoff: "ccf-paper-translator, ccf-literature-searcher, ccf-paper-reviewer, ccf-paper-to-exemplar, ccf-idea-optimizer"
   - name: ccf-paper-translator
-    trigger: "Translate one complete supplied paper or PDF faithfully, paragraph by paragraph, preserving equations, citations, tables, appendices, and all original source-paper figures."
+    trigger: "Translate one complete supplied paper or PDF faithfully, paragraph by paragraph, preserving correctly rendered Markdown mathematics, citations, tables, appendices, and all original source-paper figures."
     exclude: "Does not summarize, analyze, review, rewrite, humanize, redraw figures, or invent missing source text."
     handoff: "ccf-paper-reader, ccf-paper-writer, ccf-paper-reviewer, ccf-paper-to-exemplar"
   - name: ccf-paper-writer

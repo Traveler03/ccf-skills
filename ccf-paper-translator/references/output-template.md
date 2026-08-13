@@ -20,6 +20,17 @@ Use only sections that exist in the source, but preserve their source order and 
 
 <translated paragraphs in source order>
 
+Inline mathematics uses `$p(y \mid x)$`.
+
+Display mathematics uses a blank-line-separated block:
+
+$$
+\begin{aligned}
+<source-equivalent LaTeX>
+\end{aligned}
+\tag{1}
+$$
+
 ![Original Figure 1](<paper-slug>.zh-CN.assets/figure-01.png)
 
 **Figure 1. <Translated caption>**
@@ -34,6 +45,8 @@ Use only sections that exist in the source, but preserve their source order and 
 - Sections translated:
 - Figures embedded / source total:
 - Tables translated or embedded / source total:
+- Equations rendered / source total:
+- Math-rendering limitations:
 - Footnotes/endnotes:
 - References:
 - Appendices:
