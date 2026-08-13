@@ -1,0 +1,4 @@
+interface:
+  display_name: "CCF Paper Translator"
+  short_description: "Translate a complete paper faithfully with all original figures."
+  default_prompt: "Use $ccf-paper-translator to translate this complete paper faithfully and reuse every original figure."

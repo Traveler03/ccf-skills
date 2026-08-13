@@ -1,10 +1,10 @@
-.DS_Store
-*.log
-*.tmp
-*.pyc
-__pycache__/
+demo/*/paper/*.pdf
 
-private/
-secrets/
-credentials/
-local-notes/
+# User inputs and local generated work products. Publish selected canonical
+# artifacts from evaluation/ or another explicit repository path instead.
+/output/
+
+# Local credentials and transient runtime caches must never enter a release.
+**/.secrets/
+**/__pycache__/
+*.pyc
