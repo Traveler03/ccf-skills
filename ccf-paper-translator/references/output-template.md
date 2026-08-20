@@ -42,6 +42,7 @@ $$
 ## Translation coverage note
 
 - Source pages:
+- Target Markdown renderer (when applicable):
 - Sections translated:
 - Figures embedded / source total:
 - Tables translated or embedded / source total:

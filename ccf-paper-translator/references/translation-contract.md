@@ -56,14 +56,15 @@ $$
 Apply these rules:
 
 1. Use `$...$` only for inline math and `$$...$$` only for display math. Keep display delimiters on separate lines and surround the block with blank lines.
-2. Do not wrap math in backticks or ordinary code fences in the translated artifact. The fences above demonstrate source syntax only.
-3. Convert extraction-damaged Unicode, lost superscripts/subscripts, and line-break fragments into valid LaTeX with identical mathematical meaning. Do not simplify or normalize away distinctions from the source.
-4. Preserve equation order and numbering. Prefer `\tag{N}`; if unsupported by the target renderer, put `(N)` immediately after the display block without changing cross-references.
-5. Keep punctuation belonging to the surrounding sentence outside the math delimiter unless it is mathematically meaningful.
-6. Escape literal currency dollars in prose as `\$`. Check that every `$` opens or closes an intentional math span.
-7. Inside Markdown tables, avoid raw `|` in formulas because it is a column delimiter. Use `\lvert`, `\rvert`, `\mid`, or another semantically correct LaTeX command. Do not place `$$...$$` blocks inside table cells.
-8. Use `aligned`, `gathered`, `cases`, `matrix`, or the source-equivalent environment for multiline structures. Verify braces, `\left`/`\right`, environment pairs, and row separators.
-9. Render-preview the completed Markdown in the intended renderer. Compare formulas visually with the source PDF, including fractions, accents, matrices, cases, limits, equation numbers, and line alignment.
+2. Identify the intended Markdown renderer. If it is unknown, use the portable profile in `markdown-math-compatibility.md`: keep inline formula source at 40 characters or fewer, move longer or nested expressions to display blocks, use `\mathrm{name}` instead of `\operatorname{name}`, and avoid custom or HTML-producing macros.
+3. Do not wrap math in backticks or ordinary code fences in the translated artifact. The fences above demonstrate source syntax only.
+4. Convert extraction-damaged Unicode, lost superscripts/subscripts, and line-break fragments into valid LaTeX with identical mathematical meaning. Do not simplify or normalize away distinctions from the source.
+5. Preserve equation order and numbering. Use `\tag{N}` only after confirming support in the target renderer; otherwise put `(N)` immediately after the display block without changing cross-references.
+6. Keep punctuation belonging to the surrounding sentence outside the math delimiter unless it is mathematically meaningful.
+7. Escape literal currency dollars in prose as `\$`. Check that every `$` opens or closes an intentional math span.
+8. Inside Markdown tables, avoid raw `|` in formulas because it is a column delimiter. Use `\lvert`, `\rvert`, `\mid`, or another semantically correct LaTeX command. Do not place `$$...$$` blocks inside table cells.
+9. Use `aligned`, `gathered`, `cases`, `matrix`, or the source-equivalent environment for multiline structures only when the target renderer supports them. Verify braces, `\left`/`\right`, environment pairs, and row separators.
+10. Run `python scripts/check_markdown_math.py <translated-file.md>` and resolve every reported error. Render-preview the completed Markdown in the intended renderer and compare formulas visually with the source PDF, including fractions, accents, matrices, cases, limits, equation numbers, and line alignment.
 
 If the target Markdown renderer lacks a required LaTeX feature, preserve the formula in the closest supported LaTeX form and state the renderer limitation in the coverage note. Never replace it with guessed plain text.
 
@@ -97,6 +98,9 @@ Before delivery, compare the translation with both extracted text and rendered p
 - All headings and paragraph blocks are accounted for.
 - All equations and citation markers are present and ordered.
 - Every inline and display math delimiter is balanced, no formula is trapped in a code span/block, and literal currency dollars are escaped.
+- The bundled Markdown-math checker reports zero errors with the intended inline-length limit and forbidden-macro profile.
+- No formula uses `\operatorname`, a custom macro definition, an HTML-producing macro, or another command rejected by the target renderer.
+- No complex formula remains inline merely because it was inline in the source; portable-profile inline formulas are at most 40 LaTeX source characters.
 - The rendered formulas match the source visually, including numbering, alignment, matrices/cases, subscripts, superscripts, accents, fractions, and delimiters.
 - Markdown tables contain no unescaped formula pipe that creates a false column and no display-math block inside a cell.
 - Figure count, numbering, panel labels, and captions match.

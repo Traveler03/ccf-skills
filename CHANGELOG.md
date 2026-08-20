@@ -1,12 +1,13 @@
 ﻿# Changelog
 
-## Unreleased - 2026-08-13
+## Unreleased - 2026-08-20
 
 - Synchronized the repository with upstream CCFA Skills v0.9.0 while preserving the custom `ccf-paper-reader` workflow.
 - Added `ccf-paper-translator` for faithful full-paper translation with source-order coverage, unchanged equations/citations/numbers, complete appendix and reference handling, and all original paper figures reused in place.
 - Added explicit routing boundaries between paper reading, complete translation, exemplar extraction, manuscript rewriting, and scientific review.
 - Expanded the customized runtime family from 17 to 19 skills and updated manifests, routing, artifact contracts, installation sets, validation, documentation, and generated diagram sources.
 - Required `ccf-paper-translator` to emit render-safe Markdown mathematics with balanced `$...$`/`$$...$$` delimiters, preserved numbering and multiline alignment, table-safe formulas, and a visual render check against the source PDF.
+- Added a portable Markdown-math profile and deterministic checker for `ccf-paper-translator`, rejecting renderer-blocked macros such as `\operatorname`, overlong inline formulas, malformed delimiters, mismatched environments, and table-breaking pipes.
 
 ## v0.9.0 - 2026-08-13
 

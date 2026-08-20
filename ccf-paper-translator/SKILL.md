@@ -38,15 +38,15 @@ Reuse the paper's original figures exactly as source assets. Do not redraw, rest
 
 1. Resolve the source: local PDF, arXiv/OpenReview URL, publisher PDF, LaTeX source, or pasted paper text. Prefer the user-supplied file over a web copy.
 2. Record the paper title, source identifier or URL, page count, visible section outline, figure/table inventory, appendix range, and target language.
-3. Read `references/translation-contract.md` before translating. Read `references/figure-policy.md` before extracting or embedding any image.
+3. Read `references/translation-contract.md` before translating. For Markdown output, also read `references/markdown-math-compatibility.md`. Read `references/figure-policy.md` before extracting or embedding any image.
 4. Extract text in reading order. For multi-column PDFs, verify paragraph continuity, headings, captions, footnotes, and page-break hyphenation against rendered pages.
 5. Build a section-by-section coverage ledger. Include front matter, abstract, all numbered and unnumbered sections, captions, tables, footnotes, acknowledgments, declarations, appendices, and references.
 6. Translate in source order. Preserve equation semantics and citation markers. For Markdown, encode every formula with the rules in `references/translation-contract.md` rather than copying broken PDF glyphs. Maintain a terminology map and use one target-language rendering for each technical term unless the source intentionally distinguishes variants.
 7. Extract or crop every original figure from the source PDF or official source package. Embed it unchanged at the corresponding location and translate its caption below it.
 8. Reconstruct tables faithfully when their cells can be verified. If a complex or rasterized table cannot be reconstructed without risk, embed the original table image and provide a complete translated table caption plus a faithful translated transcription immediately below it.
 9. Load `references/output-template.md` and create the requested artifact. If no format is requested, write one canonical Markdown file and a sibling asset directory.
-10. Render-preview the Markdown output and inspect every inline and display equation for delimiter balance, valid LaTeX, numbering, alignment, clipping, and table interference.
-11. Run the completeness and fidelity checks in `references/translation-contract.md`. Do not deliver while any source section, equation, figure, table, footnote, appendix, or citation block is unaccounted for.
+10. For Markdown, run `python scripts/check_markdown_math.py <translated-file.md>` and resolve every reported error. Then preview the file in the user's actual target renderer and inspect every inline and display equation for delimiter balance, valid LaTeX, numbering, alignment, clipping, raw-source fallback, and table interference.
+11. Run the completeness and fidelity checks in `references/translation-contract.md`. Do not deliver while any source section, equation, figure, table, footnote, appendix, citation block, or math-rendering error is unaccounted for.
 
 ## Translation Rules
 
@@ -62,13 +62,16 @@ Reuse the paper's original figures exactly as source assets. Do not redraw, rest
 ## Markdown Math Rendering
 
 - Use `$...$` for inline mathematics and `$$...$$` for display mathematics. Put each `$$` delimiter on its own line with a blank line before and after the display block.
+- Identify the user's target Markdown renderer before choosing LaTeX commands. If it is unknown, use the portable profile in `references/markdown-math-compatibility.md`.
+- Keep portable inline formulas at 40 LaTeX source characters or fewer. Move longer, nested, or renderer-sensitive formulas to a display block even when the source paper placed them inline.
+- Use portable formatting such as `\mathrm{name}` for named functions. Do not emit `\operatorname`, custom macro definitions, HTML-producing macros, or any macro rejected by the target renderer.
 - Never place a formula in backticks, an ordinary fenced code block, a blockquote, or an image when valid LaTeX can represent it.
 - Keep LaTeX commands, braces, subscripts, superscripts, matrices, cases, fractions, accents, and delimiters intact. Do not let Markdown escaping alter `_`, `^`, `*`, `\`, `{}`, or `[]` inside math delimiters.
 - Use `aligned`, `gathered`, `cases`, or the source-equivalent environment inside `$$...$$` for multiline equations. Preserve line relationships and alignment points; do not split one equation into unrelated blocks.
 - Preserve source equation numbers. Use `\tag{N}` inside the display block when the target renderer supports it; otherwise put the unchanged equation number immediately after the block as plain text.
 - In Markdown tables, use inline math only. Replace semantic raw vertical bars with valid LaTeX such as `\lvert`, `\rvert`, or `\mid` so Markdown does not split table columns. Move complex display equations outside the table while retaining an unambiguous row reference.
 - Escape literal currency dollar signs outside mathematics as `\$` so they do not open accidental math spans.
-- Before delivery, render the actual Markdown target and verify every formula visually against the source. Balanced delimiters alone are insufficient.
+- Before delivery, run the bundled math checker, render the actual Markdown target, and verify every formula visually against the source. Balanced delimiters or a successful generic LaTeX compile are insufficient because Markdown renderers use different macro policies.
 
 ## Figure Handling
 
@@ -98,5 +101,6 @@ When the user requests DOCX, PDF, LaTeX, or bilingual output, preserve the same 
 ## References
 
 - `references/translation-contract.md`: Read before translation and during the final completeness/fidelity audit.
+- `references/markdown-math-compatibility.md`: Read before producing or repairing Markdown mathematics.
 - `references/figure-policy.md`: Read before extracting, cropping, naming, or embedding source-paper images.
 - `references/output-template.md`: Read before creating the final translated artifact.
