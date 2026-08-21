@@ -63,8 +63,9 @@ Reuse the paper's original figures exactly as source assets. Do not redraw, rest
 
 - Use `$...$` for inline mathematics and `$$...$$` for display mathematics. Put each `$$` delimiter on its own line with a blank line before and after the display block.
 - Identify the user's target Markdown renderer before choosing LaTeX commands. If it is unknown, use the portable profile in `references/markdown-math-compatibility.md`.
-- Keep portable inline formulas at 40 LaTeX source characters or fewer. Move longer, nested, or renderer-sensitive formulas to a display block even when the source paper placed them inline.
+- Keep portable inline formulas at 40 LaTeX source characters or fewer. Move longer, nested, renderer-sensitive, or matrix/tensor-shape formulas to a display block even when the source paper placed them inline.
 - Use portable formatting such as `\mathrm{name}` for named functions. Do not emit `\operatorname`, custom macro definitions, HTML-producing macros, or any macro rejected by the target renderer.
+- Keep configuration keys and other identifiers containing underscores out of mathematics. Render them as Markdown code or tables; do not rely on `\_` inside math because Markdown preprocessing may remove its backslash before the math renderer runs.
 - Never place a formula in backticks, an ordinary fenced code block, a blockquote, or an image when valid LaTeX can represent it.
 - Keep LaTeX commands, braces, subscripts, superscripts, matrices, cases, fractions, accents, and delimiters intact. Do not let Markdown escaping alter `_`, `^`, `*`, `\`, `{}`, or `[]` inside math delimiters.
 - Use `aligned`, `gathered`, `cases`, or the source-equivalent environment inside `$$...$$` for multiline equations. Preserve line relationships and alignment points; do not split one equation into unrelated blocks.

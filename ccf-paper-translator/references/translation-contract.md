@@ -56,7 +56,7 @@ $$
 Apply these rules:
 
 1. Use `$...$` only for inline math and `$$...$$` only for display math. Keep display delimiters on separate lines and surround the block with blank lines.
-2. Identify the intended Markdown renderer. If it is unknown, use the portable profile in `markdown-math-compatibility.md`: keep inline formula source at 40 characters or fewer, move longer or nested expressions to display blocks, use `\mathrm{name}` instead of `\operatorname{name}`, and avoid custom or HTML-producing macros.
+2. Identify the intended Markdown renderer. If it is unknown, use the portable profile in `markdown-math-compatibility.md`: keep inline formula source at 40 characters or fewer; move longer, nested, or matrix/tensor-shape expressions to display blocks; use `\mathrm{name}` instead of `\operatorname{name}`; keep underscore-containing configuration keys in Markdown code or tables; and avoid custom or HTML-producing macros.
 3. Do not wrap math in backticks or ordinary code fences in the translated artifact. The fences above demonstrate source syntax only.
 4. Convert extraction-damaged Unicode, lost superscripts/subscripts, and line-break fragments into valid LaTeX with identical mathematical meaning. Do not simplify or normalize away distinctions from the source.
 5. Preserve equation order and numbering. Use `\tag{N}` only after confirming support in the target renderer; otherwise put `(N)` immediately after the display block without changing cross-references.
@@ -100,6 +100,8 @@ Before delivery, compare the translation with both extracted text and rendered p
 - Every inline and display math delimiter is balanced, no formula is trapped in a code span/block, and literal currency dollars are escaped.
 - The bundled Markdown-math checker reports zero errors with the intended inline-length limit and forbidden-macro profile.
 - No formula uses `\operatorname`, a custom macro definition, an HTML-producing macro, or another command rejected by the target renderer.
+- No formula contains an identifier encoded with `\_` or a raw underscore inside `\mathrm`, `\mathtt`, `\text`, or `\textit`; use Markdown code or a table for such identifiers.
+- Matrix and tensor shape declarations use display math rather than portable-profile inline math.
 - No complex formula remains inline merely because it was inline in the source; portable-profile inline formulas are at most 40 LaTeX source characters.
 - The rendered formulas match the source visually, including numbering, alignment, matrices/cases, subscripts, superscripts, accents, fractions, and delimiters.
 - Markdown tables contain no unescaped formula pipe that creates a false column and no display-math block inside a cell.

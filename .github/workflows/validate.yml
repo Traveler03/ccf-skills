@@ -17,3 +17,4 @@ jobs:
       - run: python ccf-common/scripts/check_sources.py
       - run: python ccf-common/scripts/check_markdown_links.py
       - run: python ccf-common/scripts/check_v04.py
+      - run: python ccf-paper-translator/scripts/test_check_markdown_math.py

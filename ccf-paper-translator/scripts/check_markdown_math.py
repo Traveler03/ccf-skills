@@ -27,6 +27,9 @@ FORBIDDEN_MACROS = {
 MACRO_RE = re.compile(r"\\([A-Za-z]+)")
 ENVIRONMENT_RE = re.compile(r"\\(begin|end)\{([^{}]+)\}")
 INLINE_CODE_RE = re.compile(r"(`+)(.*?)\1")
+TEXTUAL_GROUP_WITH_SUBSCRIPT_RE = re.compile(
+    r"\\(?:mathrm|mathtt|text|textit)\{[^{}]*_[^{}]*\}"
+)
 
 
 def is_escaped(text: str, index: int) -> bool:
@@ -79,6 +82,23 @@ def check_formula(
         errors.append(
             f"line {line_number}: inline formula has {len(formula)} source characters "
             f"(limit {max_inline_length}); move it to a display block"
+        )
+
+    if inline and "\\mathbb" in formula and "\\times" in formula:
+        errors.append(
+            f"line {line_number}: matrix/tensor shape declarations are not portable "
+            "inline; move this formula to a display block"
+        )
+
+    if r"\_" in formula:
+        errors.append(
+            f"line {line_number}: escaped underscore \\_ inside math is not portable; "
+            "put the identifier in Markdown code or a table"
+        )
+    elif TEXTUAL_GROUP_WITH_SUBSCRIPT_RE.search(formula):
+        errors.append(
+            f"line {line_number}: underscore inside a text-style math group can create "
+            "double subscripts; put the identifier in Markdown code or a table"
         )
 
     problem = brace_error(formula)
