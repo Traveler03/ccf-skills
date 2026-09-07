@@ -24,7 +24,19 @@ def check(formula: str, *, inline: bool) -> list[str]:
 class PortableMathTests(unittest.TestCase):
     def test_rejects_escaped_underscore_identifier(self) -> None:
         errors = check(r"\mathrm{num\_kv\_heads}=1", inline=False)
-        self.assertTrue(any("escaped underscore" in error for error in errors))
+        self.assertTrue(any("Markdown-escapable punctuation" in error for error in errors))
+
+    def test_rejects_escaped_percent(self) -> None:
+        errors = check(r"9.1\%", inline=True)
+        self.assertTrue(any("Markdown-escapable punctuation" in error for error in errors))
+
+    def test_rejects_cosmetic_spacing_command(self) -> None:
+        errors = check(r"f\!(x)", inline=True)
+        self.assertTrue(any("Markdown-escapable punctuation" in error for error in errors))
+
+    def test_rejects_thin_space_command(self) -> None:
+        errors = check(r"p(x),\,q(x)", inline=True)
+        self.assertTrue(any("Markdown-escapable punctuation" in error for error in errors))
 
     def test_rejects_raw_underscore_in_text_style_group(self) -> None:
         errors = check(r"\mathrm{num_kv_heads}=1", inline=False)

@@ -1,6 +1,6 @@
 ﻿# Changelog
 
-## Unreleased - 2026-08-21
+## Unreleased - 2026-09-07
 
 - Synchronized the repository with upstream CCFA Skills v0.9.0 while preserving the custom `ccf-paper-reader` workflow.
 - Added `ccf-paper-translator` for faithful full-paper translation with source-order coverage, unchanged equations/citations/numbers, complete appendix and reference handling, and all original paper figures reused in place.
@@ -9,6 +9,7 @@
 - Required `ccf-paper-translator` to emit render-safe Markdown mathematics with balanced `$...$`/`$$...$$` delimiters, preserved numbering and multiline alignment, table-safe formulas, and a visual render check against the source PDF.
 - Added a portable Markdown-math profile and deterministic checker for `ccf-paper-translator`, rejecting renderer-blocked macros such as `\operatorname`, overlong inline formulas, malformed delimiters, mismatched environments, and table-breaking pipes.
 - Hardened the translator against Markdown preprocessing of `\_`, double-subscript failures in math-styled configuration keys, and inline matrix/tensor shape declarations; such identifiers now use Markdown code or tables and dimension declarations use display math.
+- Generalized the Markdown-preprocessing guard to reject every backslash-plus-punctuation math command, including `\%`, `\!`, `\,`, and `\\`, which CommonMark renderers may consume before LaTeX parsing.
 
 ## v0.9.0 - 2026-08-13
 

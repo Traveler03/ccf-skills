@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import string
 import sys
 from pathlib import Path
 
@@ -90,12 +91,23 @@ def check_formula(
             "inline; move this formula to a display block"
         )
 
-    if r"\_" in formula:
+    punctuation_escapes = sorted(
+        {
+            match.group(1)
+            for match in re.finditer(r"\\(.)", formula)
+            if match.group(1) in string.punctuation
+        }
+    )
+    if punctuation_escapes:
+        commands = ", ".join(f"\\{value}" for value in punctuation_escapes)
         errors.append(
-            f"line {line_number}: escaped underscore \\_ inside math is not portable; "
-            "put the identifier in Markdown code or a table"
+            f"line {line_number}: Markdown-escapable punctuation command(s) "
+            f"{commands} inside math are not portable; Markdown may consume the "
+            "backslash before math parsing"
         )
-    elif TEXTUAL_GROUP_WITH_SUBSCRIPT_RE.search(formula):
+
+    formula_without_escaped_underscores = formula.replace(r"\_", "")
+    if TEXTUAL_GROUP_WITH_SUBSCRIPT_RE.search(formula_without_escaped_underscores):
         errors.append(
             f"line {line_number}: underscore inside a text-style math group can create "
             "double subscripts; put the identifier in Markdown code or a table"

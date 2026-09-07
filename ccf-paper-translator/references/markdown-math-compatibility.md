@@ -15,6 +15,7 @@ Markdown math is not a single standard. GitHub, Codex previews, editors, static-
 - Prefer common primitive commands such as `\mathbf`, `\mathrm`, `\mathbb`, `\mathcal`, `\frac`, `\sqrt`, `\sum`, `\prod`, `\left`, `\right`, `\lvert`, `\rvert`, `\mid`, `\cdot`, `\times`, and standard Greek-letter commands.
 - Write named functions as `\mathrm{swish}`, `\mathrm{concat}`, or another `\mathrm{...}` expression. Do not use `\operatorname` in the portable profile.
 - Put configuration keys and identifiers such as `mlp_dim` or `num_kv_heads` in Markdown code spans or tables, not inside math. Do not encode their underscores as `\_`: some Markdown pipelines consume that escape before invoking the math renderer, turning one textual identifier into multiple TeX subscripts.
+- Avoid TeX commands made from a backslash plus punctuation, including `\%`, `\!`, `\,`, `\;`, `\_`, `\{`, `\}`, and `\\`. CommonMark can consume these escapes before invoking the math renderer. Write percentages as prose such as `9.1%`, omit cosmetic math-spacing commands, avoid escaped punctuation inside math, and use multiline syntax only after testing the target.
 - Do not define macros with `\newcommand`, `\renewcommand`, `\DeclareMathOperator`, or `\def`.
 - Do not use renderer-control or HTML-producing commands such as `\require`, `\href`, `\url`, `\includegraphics`, `\htmlClass`, `\htmlId`, or `\htmlStyle` inside math.
 - Use `\tag` and multiline environments only after confirming target support. Otherwise place an equation number as plain text immediately after the display block.
@@ -28,6 +29,6 @@ Run from the skill directory:
 
     python scripts/check_markdown_math.py path/to/translation.md
 
-The default check enforces the portable 40-character inline limit, display placement for dimension declarations, underscore-safe identifiers, display-delimiter layout, balanced braces and `\left`/`\right`, matched environments, table safety, and a denylist of non-portable macros. Use `--max-inline-length` only when the named target renderer has been tested with a different limit.
+The default check enforces the portable 40-character inline limit, display placement for dimension declarations, Markdown-safe punctuation handling, underscore-safe identifiers, display-delimiter layout, balanced braces and `\left`/`\right`, matched environments, table safety, and a denylist of non-portable macros. Use `--max-inline-length` only when the named target renderer has been tested with a different limit.
 
 The checker is a gate, not a renderer. After it passes, visually inspect every equation in the actual target and compare it with the source paper.
