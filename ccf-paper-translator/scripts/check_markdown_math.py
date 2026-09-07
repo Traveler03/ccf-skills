@@ -91,6 +91,12 @@ def check_formula(
             "inline; move this formula to a display block"
         )
 
+    if "'" in formula:
+        errors.append(
+            f"line {line_number}: ASCII apostrophe inside math is not portable; "
+            "write a prime explicitly as ^{\\prime}"
+        )
+
     punctuation_escapes = sorted(
         {
             match.group(1)
@@ -219,6 +225,11 @@ def lint_file(path: Path, max_inline_length: int, extra_forbidden: set[str]) -> 
         table_line = line.lstrip().startswith("|")
         for start, end in zip(dollars[0::2], dollars[1::2]):
             formula = line[start + 1 : end]
+            if start > 0 and not line[start - 1].isspace():
+                errors.append(
+                    f"line {index}: opening inline $ must be at line start or "
+                    "preceded by whitespace; add a space before $"
+                )
             if table_line and unescaped_positions(formula, "|"):
                 errors.append(
                     f"line {index}: raw | inside table math can split a Markdown column; "

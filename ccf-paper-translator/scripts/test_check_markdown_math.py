@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -19,6 +20,13 @@ def check(formula: str, *, inline: bool) -> list[str]:
     errors: list[str] = []
     CHECKER.check_formula(formula, 1, errors, 40, inline, set())
     return errors
+
+
+def lint(markdown: str) -> list[str]:
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "sample.md"
+        path.write_text(markdown, encoding="utf-8")
+        return CHECKER.lint_file(path, 40, set())
 
 
 class PortableMathTests(unittest.TestCase):
@@ -57,6 +65,20 @@ class PortableMathTests(unittest.TestCase):
     def test_accepts_nested_environments(self) -> None:
         formula = r"\begin{aligned}\begin{matrix}a\end{matrix}\end{aligned}"
         self.assertEqual(check(formula, inline=False), [])
+
+    def test_rejects_inline_opener_attached_to_cjk_punctuation(self) -> None:
+        errors = lint(r"观测，$\mathbf{o}_t$ 是状态。")
+        self.assertTrue(any("opening inline $" in error for error in errors))
+
+    def test_accepts_inline_opener_after_whitespace(self) -> None:
+        self.assertEqual(lint(r"观测， $\mathbf{o}_t$ 是状态。"), [])
+
+    def test_rejects_ascii_prime(self) -> None:
+        errors = check(r"\mathbf{a}_{t'}", inline=True)
+        self.assertTrue(any("ASCII apostrophe" in error for error in errors))
+
+    def test_accepts_explicit_prime(self) -> None:
+        self.assertEqual(check(r"\mathbf{a}_{t^{\prime}}", inline=True), [])
 
 
 if __name__ == "__main__":
